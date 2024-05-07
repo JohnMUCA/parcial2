@@ -51,7 +51,7 @@ public:
         longitud = 0;
     }
 
-    VECTOR(int tam)
+    VECTOR(unsigned short tam)
     {
         estructura = new T[tam];
         longitud = tam;
@@ -84,6 +84,16 @@ public:
     T *getfirst()
     {
         return this->estructura;
+    }
+
+    int index(T element) const
+    {
+        unsigned short cont = 0;
+        while (cont < longitud)
+        {
+            if (element == estructura[cont]) return cont;
+        }
+        return -1;
     }
 };
 
