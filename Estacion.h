@@ -7,15 +7,17 @@ using namespace std;
 class Estacion{
 private:
     string nombre;
-    int tiempoSiguiente;
-    int tiempoAnterior;
+    unsigned short tiempoSiguiente;
+    unsigned short tiempoAnterior;
     bool esTransferencia;
 
 public:
-    Estacion(string _nombre, int _tiempoSiguiente, int _tiempoAnterior, bool _esTransferencia);
+    Estacion(string _nombre, unsigned short _tiempoSiguiente, unsigned short _tiempoAnterior, bool _esTransferencia);
+    Estacion();
     string getNombre() const;
-    int getTiempoSiguiente() const;
-    int getTiempoAnterior() const;
+    unsigned short getTiempoSiguiente() const;
+    unsigned short getTiempoAnterior() const;
     bool getEsTransferencia() const;
+    bool operator ==(Estacion& esta2);
 };
 #endif // ESTACION_H

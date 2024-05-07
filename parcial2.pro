@@ -6,9 +6,11 @@ CONFIG -= qt
 SOURCES += \
         main.cpp \
         Estacion.cpp \
-        Linea.cpp
+        Linea.cpp \
+        redmetro.cpp
 
 HEADERS += \
         Estacion.h \
         Linea.h \
-        VECTOR.h
+        VECTOR.h \
+        redmetro.h
