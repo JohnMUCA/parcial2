@@ -4,4 +4,11 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+        Estacion.cpp \
+        Linea.cpp
+
+HEADERS += \
+        Estacion.h \
+        Linea.h \
+        VECTOR.h
