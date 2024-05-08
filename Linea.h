@@ -26,6 +26,7 @@ public:
     void eliminarEstacion(string nombreEstacion);
     bool verificarEstacion(string nombreEstacion);
     Estacion* getEstaciones();
+    bool tieneEstacionesTransferencia() const;
     bool operator ==(Linea& lin2);
 
 };

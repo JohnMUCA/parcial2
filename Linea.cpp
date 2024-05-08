@@ -63,6 +63,16 @@ Estacion *Linea::getEstaciones()
     return estaciones.getfirst();
 }
 
+bool Linea::tieneEstacionesTransferencia() const
+{
+    for (unsigned short i = 0; i < numEstaciones; i++) {
+        if (estaciones.getfirst()[i].getEsTransferencia()) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool Linea::operator ==(Linea &lin2)
 {
     if ((nombre == lin2.getNombre()) && (tipoTransporte == lin2.getTipoTransporte()) && (this->getEstaciones() == lin2.getEstaciones()) && (numEstaciones == lin2.getCantidadEstaciones()))

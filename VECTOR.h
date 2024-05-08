@@ -31,6 +31,7 @@ private:
         this->copiarConte(estructura, aux);
         delete[] this->estructura;
         estructura = new T[this->longitud - 1];
+        this->longitud -= 1;
         this->copiarConte(aux, estructura);
         delete[] aux;
     }
@@ -72,7 +73,6 @@ public:
             this->estructura[i] = this->estructura[i + 1];
         }
         this->recortarEspacio();
-        this->longitud -= 1;
         return element;
     }
 
@@ -81,7 +81,7 @@ public:
         return this->longitud;
     }
 
-    T *getfirst()
+    T *getfirst() const
     {
         return this->estructura;
     }
