@@ -34,21 +34,21 @@ bool redMetro::verificarEstacionEnLinea(string nombreEstacion, string nombreLine
     return (this->obtenerLineaConSuNombre(nombreLinea)->verificarEstacion(nombreEstacion));
 }
 
-unsigned short redMetro::calcularTiempoLlegada(redMetro &red_metro, const string &nombreLinea, const string &estacionOriginal, const string &estacionFinal)
+unsigned short redMetro::calcularTiempoLlegada(const string &nombreLinea, const string &estacionOriginal, const string &estacionFinal)
 {
     unsigned short tiempoTotal = 0;
     bool empezarSuma = false;
-    for (unsigned short i = 0; i < red_metro.getNumLineas(); i++) {
-        if (red_metro.getLineas()[i].getNombre() == nombreLinea) {
-            for (unsigned short j = 0; j < red_metro.getLineas()[i].getCantidadEstaciones(); j++) {
-                if (red_metro.getLineas()[i].getEstaciones()[j].getNombre() == estacionOriginal) {
+    for (unsigned short i = 0; i < this->getNumLineas(); i++) {
+        if (this->getLineas()[i].getNombre() == nombreLinea) {
+            for (unsigned short j = 0; j < this->getLineas()[i].getCantidadEstaciones(); j++) {
+                if (this->getLineas()[i].getEstaciones()[j].getNombre() == estacionOriginal) {
                     empezarSuma = true;
                     continue;
                 }
                 if (empezarSuma) {
-                    tiempoTotal += red_metro.getLineas()[i].getEstaciones()[j].getTiempoAnterior();
+                    tiempoTotal += this->getLineas()[i].getEstaciones()[j].getTiempoAnterior();
                 }
-                if (red_metro.getLineas()[i].getEstaciones()[j].getNombre() == estacionFinal) {
+                if (this->getLineas()[i].getEstaciones()[j].getNombre() == estacionFinal) {
                     break;
                 }
             }
@@ -69,11 +69,10 @@ Linea *redMetro::obtenerLineaConSuNombre(string nombre)
         if (Lineas[cont].getNombre() == nombre)
         {
             linea = &(Lineas[cont]);
-            break;
+            return linea;
         }
+        cont += 1;
     }
-
-    return linea;
 }
 
 unsigned short redMetro::redMetro::getCantidadEstacionesRed()

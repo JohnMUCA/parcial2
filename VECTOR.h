@@ -89,11 +89,17 @@ public:
     int index(T element) const
     {
         unsigned short cont = 0;
+        int pos = -1;
         while (cont < longitud)
         {
-            if (element == estructura[cont]) return cont;
+            if (element == estructura[cont])
+            {
+                pos = cont;
+            }
+            cont += 1;
+
         }
-        return -1;
+        return pos;
     }
 };
 

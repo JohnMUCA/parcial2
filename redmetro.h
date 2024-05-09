@@ -22,7 +22,7 @@ public:
     void eliminarLinea(string nombreLinea);
     unsigned short getCantidadEstacionesRed();
     bool verificarEstacionEnLinea(string nombreEstacion, string nombreLinea);
-    unsigned short calcularTiempoLlegada(redMetro& red_metro, const string& nombreLinea, const string& estacionOriginal, const string& estacionFinal);
+    unsigned short calcularTiempoLlegada(const string& nombreLinea, const string& estacionOriginal, const string& estacionFinal);
     Linea* obtenerLineaConSuNombre(string nombre);
     Linea* getLineas();
 };

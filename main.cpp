@@ -296,8 +296,13 @@ int main() {
                 cout << endl;
                 continue;
             }
-
-            unsigned short tiempoLlegada = red_metro.calcularTiempoLlegada(red_metro, nombreLinea, estacionOriginal, estacionFinal);
+            if (!(red_metro.obtenerLineaConSuNombre(nombreLinea)->EstaIzquierdaDe(estacionOriginal, estacionFinal)))
+            {
+                string aux = estacionOriginal;
+                estacionOriginal = estacionFinal;
+                estacionFinal = aux;
+            }
+            unsigned short tiempoLlegada = red_metro.calcularTiempoLlegada(nombreLinea, estacionOriginal, estacionFinal);
             cout << "El tiempo de llegada entre las estaciones '" << estacionOriginal << "' y '" << estacionFinal << "' en la linea '" << nombreLinea << "' es de " << tiempoLlegada << " minutos." << endl;
             cout << endl;
         } else if (opcion == 10) {

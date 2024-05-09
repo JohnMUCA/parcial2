@@ -81,3 +81,31 @@ bool Linea::operator ==(Linea &lin2)
     }
     return 0;
 }
+
+Estacion* Linea::obtenerEstacionConSuNombre(string nombre)
+{
+    Estacion* estacion;
+    unsigned short cont = 0;
+    Estacion* Estaciones = this->estaciones.getfirst();
+    while (cont < this->numEstaciones)
+    {
+        if (Estaciones[cont].getNombre() == nombre)
+        {
+            estacion = &(Estaciones[cont]);
+            break;
+        }
+        cont += 1;
+    }
+
+    return estacion;
+}
+
+bool Linea::EstaIzquierdaDe(string estacionOrigen, string estacionFinal)
+{
+    Estacion* EstO = this->obtenerEstacionConSuNombre(estacionOrigen);
+    Estacion* EstF = this->obtenerEstacionConSuNombre(estacionFinal);
+    unsigned short posEstO = estaciones.index(*EstO);
+    unsigned short posEstF = estaciones.index(*EstF);
+    if(posEstO < posEstF) return 1;
+    else return 0;
+}
