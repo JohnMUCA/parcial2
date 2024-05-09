@@ -20,24 +20,43 @@ void redMetro::agregarLinea(string nombreLinea, string tipoTransp)
 void redMetro::eliminarLinea(string nombreLinea)
 {
     Linea* lin = obtenerLineaConSuNombre(nombreLinea);
-    lineas.delPos(lineas.index(*lin));
-    numLineas -= 1;
+    if(!lin->tieneEstacionesTransferencia()){
+        lineas.delPos(lineas.index(*lin));
+        numLineas -= 1;
+    }else{
+        cout << "No se puede eliminar porque tiene estacion de trasnferencia" << endl;
+    }
 }
 
-unsigned short redMetro::getCantidadEstacionesRed()
-{
-    unsigned short sum = 0;
-    Linea* Lineas = this->lineas.getfirst();
-    for (unsigned int i = 0; i < this->numLineas; i++)
-    {
-        sum += Lineas[i].getCantidadEstaciones();
-    }
-    return sum;
-}
 
 bool redMetro::verificarEstacionEnLinea(string nombreEstacion, string nombreLinea)
 {
     return (this->obtenerLineaConSuNombre(nombreLinea)->verificarEstacion(nombreEstacion));
+}
+
+unsigned short redMetro::calcularTiempoLlegada(const string &nombreLinea, const string &estacionOriginal, const string &estacionFinal)
+{
+    unsigned short tiempoTotal = 0;
+    bool empezarSuma = false;
+    for (unsigned short i = 0; i < this->getNumLineas(); i++) {
+        if (this->getLineas()[i].getNombre() == nombreLinea) {
+            for (unsigned short j = 0; j < this->getLineas()[i].getCantidadEstaciones(); j++) {
+                if (this->getLineas()[i].getEstaciones()[j].getNombre() == estacionOriginal) {
+                    empezarSuma = true;
+                    continue;
+                }
+                if (empezarSuma) {
+                    tiempoTotal += this->getLineas()[i].getEstaciones()[j].getTiempoAnterior();
+                }
+                if (this->getLineas()[i].getEstaciones()[j].getNombre() == estacionFinal) {
+                    break;
+                }
+            }
+            break;
+        }
+    }
+    return tiempoTotal;
+
 }
 
 Linea *redMetro::obtenerLineaConSuNombre(string nombre)
@@ -50,51 +69,28 @@ Linea *redMetro::obtenerLineaConSuNombre(string nombre)
         if (Lineas[cont].getNombre() == nombre)
         {
             linea = &(Lineas[cont]);
-            break;
+            return linea;
         }
+        cont += 1;
     }
+}
 
-    return linea;
+unsigned short redMetro::redMetro::getCantidadEstacionesRed()
+{
+    unsigned short sum = 0;
+    Linea* linea = lineas.getfirst();
+    for (unsigned short i = 0; i < numLineas; i++) {
+        sum += linea->getCantidadEstaciones();
+        /*for (unsigned short j = 0; j < lineas.getfirst()[i].getCantidadEstaciones(); j++) {
+            if (!estaciones[j].getEsTransferencia()) {
+                sum++;
+            }
+        }*/
+    }
+    return sum;
 }
 
 Linea *redMetro::getLineas()
 {
     return lineas.getfirst();
 }
-
-
-/*class RedMetro {
-private:
-VECTOR<Linea> lineas;
-
-public:
-unsigned short getCantidadLineas() const { return lineas.len(); }
-
-void agregarLinea(Linea linea) { lineas.append(linea); }
-
-void eliminarLinea(string nombreLinea) {
-    for (unsigned short i = 0; i < lineas.len(); i++) {
-        if (lineas.getfirst()[i].getNombre() == nombreLinea) {
-            lineas.delPos(i);
-            break;
-        }
-    }
-}
-
-unsigned short getCantidadEstacionesRed() const {
-    unsigned short totalEstaciones = 0;
-    for (unsigned short i = 0; i < lineas.len(); i++) {
-        totalEstaciones += lineas.getfirst()[i].getCantidadEstaciones();
-    }
-    return totalEstaciones;
-}
-
-bool verificarEstacionEnLinea(string nombreEstacion, string nombreLinea) const {
-    for (unsigned short i = 0; i < lineas.len(); i++) {
-        if (lineas.getfirst()[i].getNombre() == nombreLinea) {
-            return lineas.getfirst()[i].verificarEstacion(nombreEstacion);
-        }
-    }
-    return false;
-}
-};*/
