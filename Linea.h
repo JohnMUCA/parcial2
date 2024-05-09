@@ -22,7 +22,6 @@ public:
     string getTipoTransporte() const;
     unsigned short getCantidadEstaciones() const;
     void agregarEstacion(string nombreEstacion, int tiempoSiguiente, int tiempoAnterior, bool esTransferencia);
-    void agregarEstacion(string nombreEstacion, bool esTransferencia);
     void eliminarEstacion(string nombreEstacion);
     bool verificarEstacion(string nombreEstacion);
     Estacion* getEstaciones();
