@@ -104,8 +104,8 @@ bool Linea::EstaIzquierdaDe(string estacionOrigen, string estacionFinal)
 {
     Estacion* EstO = this->obtenerEstacionConSuNombre(estacionOrigen);
     Estacion* EstF = this->obtenerEstacionConSuNombre(estacionFinal);
-    unsigned short posEstO = estaciones.index(*EstO);
-    unsigned short posEstF = estaciones.index(*EstF);
+    int posEstO = estaciones.index(*EstO);
+    int posEstF = estaciones.index(*EstF);
     if(posEstO < posEstF) return 1;
     else return 0;
 }
